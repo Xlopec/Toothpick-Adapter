@@ -1,4 +1,4 @@
-package com.oliynick.max.toothpickadapter
+package com.oliynick.max.toothpickadapter.misc
 
 import android.os.Parcel
 import android.os.Parcelable

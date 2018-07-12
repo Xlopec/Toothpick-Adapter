@@ -41,6 +41,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     api "com.github.stephanenicolas.toothpick:toothpick-runtime:$toothpick"
+    api "com.github.stephanenicolas.toothpick:smoothie:$toothpick"
 
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpick"
+
+    testApi "com.github.stephanenicolas.toothpick:toothpick-testing:$toothpick"
 }
