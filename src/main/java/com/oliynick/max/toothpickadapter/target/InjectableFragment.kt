@@ -8,7 +8,7 @@ import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
 
-abstract class InjectableFragment protected constructor(private inline val provider: (InjectableFragment) -> Array<Module>) : Fragment(),
+abstract class InjectableFragment protected constructor(private inline val provider: (InjectableFragment) -> Array<Module> = { emptyArray() }) : Fragment(),
         ComponentHolder {
 
     private companion object {
@@ -16,11 +16,9 @@ abstract class InjectableFragment protected constructor(private inline val provi
         private const val ARG_KEY = "argKey"
     }
 
-    protected constructor(module: Module, vararg modules: Module) : this({ arrayOf(module, *modules) })
+    protected constructor(vararg modules: Module) : this({ arrayOf(*modules) })
 
     protected constructor(module: Module) : this({ arrayOf(module) })
-
-    protected constructor() : this({ emptyArray() })
 
     final override lateinit var key: Key
     final override lateinit var scope: Scope

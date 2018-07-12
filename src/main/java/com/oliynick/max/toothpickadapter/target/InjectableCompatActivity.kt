@@ -11,7 +11,7 @@ import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
 
-abstract class InjectableCompatActivity protected constructor(private inline val provider: (InjectableCompatActivity) -> Array<Module>) : AppCompatActivity(),
+abstract class InjectableCompatActivity protected constructor(private inline val provider: (InjectableCompatActivity) -> Array<Module> = { emptyArray() }) : AppCompatActivity(),
         ComponentHolder {
 
     private companion object {
@@ -19,11 +19,9 @@ abstract class InjectableCompatActivity protected constructor(private inline val
         private const val ARG_KEY = "argKey"
     }
 
-    protected constructor(module: Module, vararg modules: Module) : this({ arrayOf(module, *modules) })
+    protected constructor(vararg modules: Module) : this({ arrayOf(*modules) })
 
     protected constructor(module: Module) : this({ arrayOf(module) })
-
-    protected constructor() : this({ emptyArray() })
 
     final override lateinit var key: Key
     final override lateinit var scope: Scope
