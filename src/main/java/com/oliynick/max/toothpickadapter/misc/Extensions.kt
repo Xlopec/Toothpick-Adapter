@@ -15,6 +15,6 @@ fun generateKey(who: Any): Key = generateKey(who.javaClass)
 
 internal fun scopeName(any: Any): Any = any.let { it as? ComponentHolder }?.key ?: any
 
-internal fun Any.inject(modules: Array<Module>, names: Array<Any>): Scope = Toothpick.openScopes(*names)
+internal fun Any.inject(modules: Array<out Module>, names: Array<Any>): Scope = Toothpick.openScopes(*names)
         .also { it.installModules(*modules) }
         .also { Toothpick.inject(this, it) }

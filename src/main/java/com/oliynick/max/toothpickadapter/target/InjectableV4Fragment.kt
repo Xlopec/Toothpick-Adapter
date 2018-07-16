@@ -8,7 +8,7 @@ import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
 
-abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment) -> Array<Module> = { emptyArray() }) : Fragment(),
+abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment) -> Array<out Module> = { emptyArray() }) : Fragment(),
         ComponentHolder {
 
     private companion object {

@@ -11,7 +11,7 @@ import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
 
-abstract class InjectableCompatActivity protected constructor(private inline val provider: (InjectableCompatActivity) -> Array<Module> = { emptyArray() }) : AppCompatActivity(),
+abstract class InjectableCompatActivity protected constructor(private inline val provider: (InjectableCompatActivity) -> Array<out Module> = { emptyArray() }) : AppCompatActivity(),
         ComponentHolder {
 
     private companion object {
