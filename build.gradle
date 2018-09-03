@@ -45,5 +45,5 @@ dependencies {
 
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpick"
 
-    testImplementation "com.github.stephanenicolas.toothpick:toothpick-testing:$toothpick"
+    api "com.github.stephanenicolas.toothpick:toothpick-testing:$toothpick"
 }
