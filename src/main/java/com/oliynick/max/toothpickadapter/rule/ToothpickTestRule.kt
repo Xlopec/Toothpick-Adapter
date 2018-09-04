@@ -12,8 +12,6 @@ import toothpick.registries.MemberInjectorRegistry
 import toothpick.registries.MemberInjectorRegistryLocator
 import toothpick.testing.ToothPickTestModule
 
-
-
 class ToothpickTestRule(test: Any, scopeName: Any? = null, vararg testModules: Module) : TestRule {
     private val testModule = ToothPickTestModule(test)
     private val scope: Scope?
@@ -38,6 +36,8 @@ class ToothpickTestRule(test: Any, scopeName: Any? = null, vararg testModules: M
             val memberInjectorRegistryClass = Class.forName("$rootRegistryPackageName.MemberInjectorRegistry")
             FactoryRegistryLocator.setRootRegistry(factoryRegistryClass.newInstance() as FactoryRegistry)
             MemberInjectorRegistryLocator.setRootRegistry(memberInjectorRegistryClass.newInstance() as MemberInjectorRegistry)
+
+            //com.t
             return this
         } catch (e: Exception) {
             throw IllegalArgumentException("Invalid package to find registries : $rootRegistryPackageName", e)
