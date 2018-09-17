@@ -46,9 +46,9 @@ abstract class InjectableCompatActivity protected constructor(private inline val
                 // activity won't be recreated later
                 // destroy to avoid memory leaks
                 Toothpick.closeScope(key)
-                Log.d(TAG, "Releasing all injections for ${javaClass.name}")
+                Log.d(TAG, "Releasing all injections for ${javaClass.name}, key=$key")
             } else {
-                Log.d(TAG, "Keeping injections for ${javaClass.name}")
+                Log.d(TAG, "Keeping injections for ${javaClass.name}, key=$key")
             }
         } finally {
             super.onDestroy()
