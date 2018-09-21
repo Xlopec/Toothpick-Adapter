@@ -29,9 +29,13 @@ abstract class InjectableCompatActivity protected constructor(private inline val
     override fun onCreate(savedInstanceState: Bundle?) {
         key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(this)
 
+        val modules = provider(this)
+
         Log.d(TAG, "Creating injections for key=$key")
         // opening scopes: App -> Activity
         scope = inject(provider(this), arrayOf(application, key))
+
+        onPostInject(key, scope, modules, savedInstanceState)
         super.onCreate(savedInstanceState)
     }
 
@@ -54,4 +58,7 @@ abstract class InjectableCompatActivity protected constructor(private inline val
             super.onDestroy()
         }
     }
+
+    protected open fun onPostInject(key: Key, scope: Scope, modules: Array<out Module>, savedInstanceState: Bundle?) = Unit
+
 }

@@ -28,9 +28,13 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
     override fun onCreate(savedInstanceState: Bundle?) {
         key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(this)
 
+        val modules = provider(this)
+
         Log.d(TAG, "Creating injections for key=$key")
         // opening scopes: App -> Activity -> Fragment
-        scope = requireActivity().let { inject(provider(this), arrayOf(it.application, scopeName(it), key)) }
+        scope = requireActivity().let { inject(modules, arrayOf(it.application, scopeName(it), key)) }
+
+        onPostInject(key, scope, modules, savedInstanceState)
         super.onCreate(savedInstanceState)
     }
 
@@ -55,4 +59,7 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
             super.onDestroy()
         }
     }
+
+    protected open fun onPostInject(key: Key, scope: Scope, modules: Array<out Module>, savedInstanceState: Bundle?) = Unit
+
 }
