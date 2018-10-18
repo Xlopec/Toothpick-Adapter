@@ -21,3 +21,17 @@
 #-renamesourcefileattribute SourceFile
 
 -adaptclassstrings **
+
+### Kotlin rules
+-dontwarn kotlin.reflect.jvm.internal.**
+-keep class kotlin.reflect.jvm.internal.** { *; }
+-keep public class kotlin.reflect.jvm.internal.impl.builtins.* { public *; }
+-keep class kotlin.reflect.** { *; }
+-dontwarn kotlin.reflect.**
+-keep class org.jetbrains.** { *; }
+
+-assumenosideeffects class android.util.Log {
+    public static int v(...);
+    public static int d(...);
+    public static int i(...);
+}
