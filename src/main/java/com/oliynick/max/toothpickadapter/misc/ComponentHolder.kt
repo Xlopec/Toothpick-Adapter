@@ -13,4 +13,9 @@ import toothpick.Scope
 interface ComponentHolder {
     val key: Key
     val scope: Scope
+    val names: Array<Any>
+
+    fun childScopeName(name: Any) = arrayOf(*names, name)
+
+    fun childScopeName(vararg names: Any) = arrayOf(*this.names, *names)
 }

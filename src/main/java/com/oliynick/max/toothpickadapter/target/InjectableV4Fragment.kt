@@ -8,7 +8,7 @@ import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
 
-abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment) -> Array<out Module> = { emptyArray() }) : Fragment(),
+abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment, Bundle?) -> Array<out Module> = { _, _ -> emptyArray() }) : Fragment(),
         ComponentHolder {
 
     private companion object {
@@ -16,23 +16,25 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
         private const val ARG_KEY = "argKey"
     }
 
-    protected constructor(vararg modules: Module) : this({ arrayOf(*modules) })
+    protected constructor(vararg modules: Module) : this({ _, _ -> arrayOf(*modules) })
 
-    protected constructor(module: Module) : this({ arrayOf(module) })
+    protected constructor(module: Module) : this({ _, _ -> arrayOf(module) })
 
     final override lateinit var key: Key
     final override lateinit var scope: Scope
+    final override lateinit var names: Array<Any>
 
     private var isOnSaveStateCalled = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(this)
 
-        val modules = provider(this)
+        val modules = provider(this, savedInstanceState)
 
         Log.d(TAG, "Creating injections for key=$key")
         // opening scopes: App -> Activity -> Fragment
-        scope = requireActivity().let { inject(modules, arrayOf(it.application, scopeName(it), key)) }
+        names = scopeName(requireActivity(), key)
+        scope = inject(modules, names)
 
         onPostInject(key, scope, modules, savedInstanceState)
         super.onCreate(savedInstanceState)
