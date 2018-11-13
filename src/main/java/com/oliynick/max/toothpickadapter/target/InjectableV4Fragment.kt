@@ -8,7 +8,6 @@ import com.oliynick.max.toothpickadapter.misc.*
 import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
-import java.io.PrintWriter
 
 abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment, Bundle?) -> Array<out Module> = { _, _ -> emptyArray() }) : Fragment(),
         ComponentHolder {
@@ -49,8 +48,6 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
     }
 
     override fun onDestroy() {
-
-        dump("this $this", null, PrintWriter(System.out, true), null)
 
         try {
             val shouldReleaseInjections = requireActivity().willNotBeReCreated()
