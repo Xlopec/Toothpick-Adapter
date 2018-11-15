@@ -14,7 +14,7 @@ fun generateKey(who: Class<*>): Key = Key("_Key#$who#${ID_GENERATOR.incrementAnd
 
 fun generateKey(who: Any): Key = generateKey(who.javaClass)
 
-internal fun scopeName(activity: Activity, vararg names: Any): Array<Any> {
+fun scopeName(activity: Activity, vararg names: Any): Array<Any> {
     if (activity is ComponentHolder) {
         return arrayOf(*activity.names, *names)
     }
@@ -22,7 +22,7 @@ internal fun scopeName(activity: Activity, vararg names: Any): Array<Any> {
     return arrayOf(activity.application, activity, *names)
 }
 
-internal fun scopeName(activity: Activity, name: Any): Array<Any> {
+fun scopeName(activity: Activity, name: Any): Array<Any> {
     if (activity is ComponentHolder) {
         return arrayOf(*activity.names, name)
     }

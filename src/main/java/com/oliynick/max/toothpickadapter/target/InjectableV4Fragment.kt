@@ -1,5 +1,6 @@
 package com.oliynick.max.toothpickadapter.target
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -33,7 +34,7 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
 
         Log.d(TAG, "Creating injections for key=$key")
         // opening scopes: App -> Activity -> Fragment
-        names = scopeName(requireActivity(), key)
+        names = provideScopeNames(requireActivity(), key)
         scope = inject(modules, names)
 
         onPostInject(key, scope, modules, savedInstanceState)
@@ -61,6 +62,8 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
             super.onDestroy()
         }
     }
+
+    protected open fun provideScopeNames(activity: Activity, key: Key) = scopeName(requireActivity(), key)
 
     protected open fun onPostInject(key: Key, scope: Scope, modules: Array<out Module>, savedInstanceState: Bundle?) = Unit
 
