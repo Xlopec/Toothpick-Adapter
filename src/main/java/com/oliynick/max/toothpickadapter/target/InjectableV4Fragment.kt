@@ -34,7 +34,7 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
 
         Log.d(TAG, "Creating injections for key=$key")
         // opening scopes: App -> Activity -> Fragment
-        names = provideScopeNames(requireActivity(), key)
+        names = provideScopeNames(requireActivity(), key, parentFragment)
         scope = inject(modules, names)
 
         onPostInject(key, scope, modules, savedInstanceState)
@@ -63,7 +63,7 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
         }
     }
 
-    protected open fun provideScopeNames(activity: Activity, key: Key) = scopeName(requireActivity(), key)
+    protected open fun provideScopeNames(activity: Activity, key: Key, parentFragment: Fragment?) = scopeName(requireActivity(), key)
 
     protected open fun onPostInject(key: Key, scope: Scope, modules: Array<out Module>, savedInstanceState: Bundle?) = Unit
 

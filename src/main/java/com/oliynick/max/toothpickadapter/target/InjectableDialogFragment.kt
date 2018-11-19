@@ -3,6 +3,7 @@ package com.oliynick.max.toothpickadapter.target
 import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
+import android.support.v4.app.Fragment
 import android.util.Log
 import com.oliynick.max.toothpickadapter.misc.*
 import toothpick.Scope
@@ -34,7 +35,7 @@ abstract class InjectableDialogFragment protected constructor(private inline val
 
         Log.d(TAG, "Creating injections for key=$key")
         // opening scopes: App -> Activity -> Fragment
-        names = provideScopeNames(requireActivity(), key)
+        names = provideScopeNames(requireActivity(), key, parentFragment)
         scope = inject(modules, names)
 
         onPostInject(key, scope, modules, savedInstanceState)
@@ -63,7 +64,7 @@ abstract class InjectableDialogFragment protected constructor(private inline val
         }
     }
 
-    protected open fun provideScopeNames(activity: Activity, key: Key) = scopeName(requireActivity(), key)
+    protected open fun provideScopeNames(activity: Activity, key: Key, parentFragment: Fragment?) = scopeName(requireActivity(), key)
 
     protected open fun onPostInject(key: Key, scope: Scope, modules: Array<out Module>, savedInstanceState: Bundle?) = Unit
 
