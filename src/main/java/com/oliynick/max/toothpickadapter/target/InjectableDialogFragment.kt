@@ -2,6 +2,7 @@ package com.oliynick.max.toothpickadapter.target
 
 import android.app.Activity
 import android.os.Bundle
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.util.Log
 import com.oliynick.max.toothpickadapter.misc.*
@@ -9,11 +10,11 @@ import toothpick.Scope
 import toothpick.Toothpick
 import toothpick.config.Module
 
-abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment, Bundle?) -> Array<out Module> = { _, _ -> emptyArray() }) : Fragment(),
+abstract class InjectableDialogFragment protected constructor(private inline val provider: (InjectableDialogFragment, Bundle?) -> Array<out Module> = { _, _ -> emptyArray() }) : DialogFragment(),
         ComponentHolder {
 
     private companion object {
-        private val TAG = InjectableV4Fragment::class.java.name!!
+        private val TAG = InjectableDialogFragment::class.java.name!!
         private const val ARG_KEY = "argKey"
     }
 
@@ -48,7 +49,6 @@ abstract class InjectableV4Fragment protected constructor(private inline val pro
     }
 
     override fun onDestroy() {
-
         try {
             val shouldReleaseInjections = requireActivity().willNotBeReCreated()
                     || (requireActivity().isDestroyingBecauseOfConfigChanges() && !isOnSaveStateCalled)
