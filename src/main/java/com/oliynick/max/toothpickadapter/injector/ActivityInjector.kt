@@ -17,7 +17,7 @@ class ActivityInjector private constructor(override val key: Key,
 
         @JvmStatic
         fun newInstance(activity: Activity, savedInstanceState: Bundle?): ActivityInjector {
-            val key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(this)
+            val key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(activity)
             val names = activity.provideScopeNames(key)
 
             return ActivityInjector(key, names)

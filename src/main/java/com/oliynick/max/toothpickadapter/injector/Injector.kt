@@ -27,9 +27,9 @@ abstract class Injector<T : Any> {
         try {
             if (shouldRelease(target)) {
                 Toothpick.closeScope(key)
-                Log.d(TAG, "Releasing all injections for ${javaClass.name}, key=$key")
+                Log.d(TAG, "Releasing all injections for $target, key=$key")
             } else {
-                Log.d(TAG, "Keeping injections for ${javaClass.name}, key=$key")
+                Log.d(TAG, "Keeping injections for $target, key=$key")
             }
         } finally {
             onPostDestroy(target)
