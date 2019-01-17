@@ -22,13 +22,15 @@ fun Any.inject(modules: Array<out Module>, names: Array<Any>): Scope = Toothpick
         .also { it.installModules(*modules) }
         .also { Toothpick.inject(this, it) }
 
-fun Any.inject(module: Module, names: Array<Any>): Scope = Toothpick.openScopes(*names)
-        .also { it.installModules(module) }
-        .also { Toothpick.inject(this, it) }
+fun Any.inject(module: Module, names: Array<Any>): Scope = openScopes(module, names).also { Toothpick.inject(this, it) }
 
-fun Any.inject(module: Module, name: Any): Scope = Toothpick.openScope(name)
+fun Any.inject(module: Module, name: Any): Scope = openScopes(module, name).also { Toothpick.inject(this, it) }
+
+fun openScopes(module: Module, names: Array<Any>): Scope = Toothpick.openScopes(*names)
         .also { it.installModules(module) }
-        .also { Toothpick.inject(this, it) }
+
+fun openScopes(module: Module, name: Any): Scope = Toothpick.openScopes(name)
+        .also { it.installModules(module) }
 
 internal fun Activity.willNotBeReCreated(): Boolean {
     return isFinishing || !isDestroyingBecauseOfConfigChanges()
