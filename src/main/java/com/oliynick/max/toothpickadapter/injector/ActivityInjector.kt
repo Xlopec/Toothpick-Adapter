@@ -37,7 +37,7 @@ class ActivityInjector private constructor(override val key: Key,
     }
 
     fun onSaveInstanceState(outState: Bundle) {
-        Log.d(TAG, "calling onSaveInstanceState")
+        Log.d(TAG, "calling onSaveInstanceState key=$key")
         outState.putParcelable(ARG_KEY, key)
     }
 

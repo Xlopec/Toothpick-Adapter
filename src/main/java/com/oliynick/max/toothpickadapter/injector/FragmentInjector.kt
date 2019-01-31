@@ -36,7 +36,7 @@ class FragmentInjector private constructor(override val key: Key,
     private var isOnSaveStateCalled = false
 
     fun onSaveInstanceState(outState: Bundle) {
-        Log.d(TAG, "calling onSaveInstanceState")
+        Log.d(TAG, "calling onSaveInstanceState, key=$key")
         outState.putParcelable(ARG_KEY, key)
         isOnSaveStateCalled = true
     }
