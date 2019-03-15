@@ -9,7 +9,7 @@ import toothpick.config.Module
 abstract class Injector<T : Any> {
 
     private companion object {
-        val TAG = Injector::class.java.name!!
+        val TAG: String = Injector::class.java.name
     }
 
     protected abstract val key: Key
