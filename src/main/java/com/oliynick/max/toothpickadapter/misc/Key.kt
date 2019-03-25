@@ -12,7 +12,7 @@ import android.os.Parcelable
  */
 data class Key(val id: String) : Parcelable {
 
-    private constructor(parcel: Parcel) : this(parcel.readString())
+    private constructor(parcel: Parcel) : this(parcel.readString()!!)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) = parcel.writeString(id)
 

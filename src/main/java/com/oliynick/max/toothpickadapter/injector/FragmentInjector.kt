@@ -9,7 +9,7 @@ class FragmentInjector private constructor(override val key: Key,
                                            override val names: Array<Any>) : Injector<Fragment>() {
 
     companion object {
-        private val TAG = FragmentInjector::class.java.name!!
+        private val TAG: String = FragmentInjector::class.java.name
         private const val ARG_KEY = "argKey"
 
         @JvmStatic
@@ -36,7 +36,7 @@ class FragmentInjector private constructor(override val key: Key,
     private var isOnSaveStateCalled = false
 
     fun onSaveInstanceState(outState: Bundle) {
-        Log.d(TAG, "calling onSaveInstanceState")
+        Log.d(TAG, "calling onSaveInstanceState, key=$key")
         outState.putParcelable(ARG_KEY, key)
         isOnSaveStateCalled = true
     }
