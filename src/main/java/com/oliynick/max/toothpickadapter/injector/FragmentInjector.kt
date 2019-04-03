@@ -13,6 +13,13 @@ class FragmentInjector private constructor(override val key: Key,
         private const val ARG_KEY = "argKey"
 
         @JvmStatic
+        fun newInstance(fragment: Fragment, savedInstanceState: Bundle?, names: Array<Any>): FragmentInjector {
+            val key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(fragment)
+
+            return FragmentInjector(key, names)
+        }
+
+        @JvmStatic
         fun newInstance(fragment: Fragment, savedInstanceState: Bundle?): FragmentInjector {
             val key = savedInstanceState?.getParcelable(ARG_KEY) ?: generateKey(fragment)
             val names = fragment.provideScopeNames(key)
