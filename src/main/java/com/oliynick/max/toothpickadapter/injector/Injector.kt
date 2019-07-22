@@ -15,7 +15,7 @@ abstract class Injector<T : Any> {
     protected abstract val key: Key
     protected abstract val names: Array<Any>
 
-    fun inject(target: T, modules: Array<out Module>) {
+    fun inject(target: T, modules: Array<out Module> = emptyArray()) {
         Log.d(TAG, "Injecting modules=$modules into $target")
         target.inject(modules, names)
         onPostInject(target)
