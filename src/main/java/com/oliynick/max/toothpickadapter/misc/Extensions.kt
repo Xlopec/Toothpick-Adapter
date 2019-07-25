@@ -1,7 +1,7 @@
 package com.oliynick.max.toothpickadapter.misc
 
 import android.app.Activity
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.oliynick.max.toothpickadapter.injector.HasInjector
 import toothpick.Scope
 import toothpick.Toothpick

@@ -2,7 +2,7 @@ package com.oliynick.max.toothpickadapter.target
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.oliynick.max.toothpickadapter.injector.ActivityInjector
 import com.oliynick.max.toothpickadapter.injector.HasInjector
 import toothpick.config.Module

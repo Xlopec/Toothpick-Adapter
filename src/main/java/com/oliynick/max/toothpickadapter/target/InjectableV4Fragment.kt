@@ -1,12 +1,12 @@
 package com.oliynick.max.toothpickadapter.target
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import com.oliynick.max.toothpickadapter.injector.FragmentInjector
 import com.oliynick.max.toothpickadapter.injector.HasInjector
 import toothpick.config.Module
 
-abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment, Bundle?) -> Array<out Module> = { _, _ -> emptyArray() }) : Fragment(), HasInjector<Fragment> {
+abstract class InjectableV4Fragment protected constructor(private inline val provider: (InjectableV4Fragment, Bundle?) -> Array<out Module> = { _, _ -> emptyArray() }) : androidx.fragment.app.Fragment(), HasInjector<androidx.fragment.app.Fragment> {
 
     protected constructor(vararg modules: Module) : this({ _, _ -> arrayOf(*modules) })
 

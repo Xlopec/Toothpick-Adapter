@@ -1,8 +1,8 @@
 package com.oliynick.max.toothpickadapter.injector
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.util.Log
+import androidx.fragment.app.Fragment
 import com.oliynick.max.toothpickadapter.misc.*
 
 class FragmentInjector private constructor(override val key: Key,
